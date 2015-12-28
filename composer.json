@@ -1,0 +1,12 @@
+{
+    "name": "hikaeme/monolog-ltsv-formatter",
+    "description": "LTSV Formatter for Monolog",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yuki Fujii",
+            "email": "fjyuuk@gmail.com"
+        }
+    ],
+    "require": {}
+}
