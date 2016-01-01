@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Hikaeme\\Extra\\Monolog\\Formatter\\": "src/"
+            "Hikaeme\\": "src/"
         }
     },
     "require-dev": {
