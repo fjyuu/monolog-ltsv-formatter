@@ -39,8 +39,7 @@ class LtsvLineBuilder
      */
     public function addRecord(array $record)
     {
-        foreach ($record as $label => $value)
-        {
+        foreach ($record as $label => $value) {
             $this->addItem((string) $label, (string) $value);
         }
     }

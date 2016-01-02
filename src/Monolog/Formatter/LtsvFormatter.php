@@ -39,8 +39,7 @@ class LtsvFormatter extends NormalizerFormatter
         $includeExtra = true,
         array $labelReplacement = array("\r" => '', "\n" => '', "\t" => '', ':' => ''),
         array $valueReplacement = array("\r" => '\r', "\n" => '\n', "\t" => '\t')
-    )
-    {
+    ) {
         parent::__construct($dateFormat);
         $this->labeling = $labeling;
         $this->includeContext = $includeContext;
