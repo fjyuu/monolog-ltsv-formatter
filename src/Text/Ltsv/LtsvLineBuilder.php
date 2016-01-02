@@ -49,7 +49,7 @@ class LtsvLineBuilder
      */
     public function build()
     {
-        $itemStrings = [];
+        $itemStrings = array();
         foreach ($this->items as $item) {
             list($label, $value) = $item;
             $itemStrings[] = $this->replaceLabel($label) . ':' . $this->replaceValue($value);
