@@ -46,10 +46,9 @@ class LtsvLineBuilder
     }
 
     /**
-     * @param bool $appendLineFeed
      * @return string
      */
-    public function build($appendLineFeed = false)
+    public function build()
     {
         $itemStrings = [];
         foreach ($this->items as $item) {
@@ -57,11 +56,7 @@ class LtsvLineBuilder
             $itemStrings[] = $this->replaceLabel($label) . ':' . $this->replaceValue($value);
         }
 
-        $line = join("\t", $itemStrings);
-        if ($appendLineFeed) {
-            $line .= PHP_EOL;
-        }
-        return $line;
+        return join("\t", $itemStrings) . PHP_EOL;
     }
 
     /**

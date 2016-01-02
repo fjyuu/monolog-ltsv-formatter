@@ -72,7 +72,7 @@ class LtsvFormatter extends NormalizerFormatter
             $builder->addRecord($this->normalizeRecord($record['extra']));
         }
 
-        return $builder->build(true);
+        return $builder->build();
     }
 
     /**
