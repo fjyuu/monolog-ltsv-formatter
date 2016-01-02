@@ -1,5 +1,6 @@
 # LTSV Formatter #
 
+[![Build Status](https://travis-ci.org/fjyuu/monolog-ltsv-formatter.svg?branch=master)](https://travis-ci.org/fjyuu/monolog-ltsv-formatter)
 [![StyleCI](https://styleci.io/repos/48897113/shield)](https://styleci.io/repos/48897113)
 
 A [LTSV](http://ltsv.org/) Formatter for [Monolog](https://github.com/Seldaek/monolog)
