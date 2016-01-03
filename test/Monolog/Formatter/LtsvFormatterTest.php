@@ -77,6 +77,32 @@ class LtsvFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $formatted);
     }
 
+    public function testFormatContextContainingObjects()
+    {
+        $dateTime = new \DateTime;
+        $record = $this->getRecord(
+            $dateTime,
+            "test",
+            array(
+                'null' => null,
+                'bool' => true,
+                'array' => array(1, 2, 3),
+            )
+        );
+
+        $formatter = new LtsvFormatter('Y-m-d');
+        $formatted = $formatter->format($record);
+        $expected = join("\t", array(
+                'time:' . $dateTime->format('Y-m-d'),
+                'level:WARNING',
+                'message:test',
+                'null:NULL',
+                'bool:true',
+                'array:[1,2,3]',
+            )) . PHP_EOL;
+        $this->assertSame($expected, $formatted);
+    }
+
     /**
      * @param \DateTime $dateTime
      * @param string $message
