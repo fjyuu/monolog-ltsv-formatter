@@ -2,7 +2,10 @@
 
 [![Build Status](https://travis-ci.org/fjyuu/monolog-ltsv-formatter.svg?branch=master)](https://travis-ci.org/fjyuu/monolog-ltsv-formatter)
 [![StyleCI](https://styleci.io/repos/48897113/shield)](https://styleci.io/repos/48897113)
-[![Latest Stable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/stable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter) [![Total Downloads](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/downloads)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter) [![Latest Unstable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/unstable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter) [![License](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/license)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
+[![Latest Stable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/stable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
+[![Total Downloads](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/downloads)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
+[![Latest Unstable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/unstable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
+[![License](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/license)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
 
 A [LTSV](http://ltsv.org/) Formatter for [Monolog](https://github.com/Seldaek/monolog)
 
