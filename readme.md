@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/fjyuu/monolog-ltsv-formatter.svg?branch=master)](https://travis-ci.org/fjyuu/monolog-ltsv-formatter)
 [![StyleCI](https://styleci.io/repos/48897113/shield)](https://styleci.io/repos/48897113)
+[![Test Coverage](https://codeclimate.com/github/fjyuu/monolog-ltsv-formatter/badges/coverage.svg)](https://codeclimate.com/github/fjyuu/monolog-ltsv-formatter/coverage)
 [![Latest Stable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/stable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
 [![Total Downloads](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/downloads)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
 [![Latest Unstable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/unstable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
