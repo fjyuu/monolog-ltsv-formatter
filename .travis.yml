@@ -7,3 +7,6 @@ php:
   - '7.0'
   - hhvm
 before_script: composer install
+addons:
+  code_climate:
+    repo_token: 7764d148bb4f016172f4e271ab65388758928075ba3576b4ec906ccf0ec31ab7
