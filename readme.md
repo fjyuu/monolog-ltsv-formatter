@@ -21,3 +21,9 @@ $log->pushHandler($handler);
 $log->addError('Something happened', array('detail1' => 'foo', 'detail2' => 'bar'));
 // time:2016-01-02 11:58:03<tab>level:ERROR<tab>message:Something happened<tab>detail1:foo<tab>detail2:bar
 ```
+
+## Installation ##
+
+```
+composer require hikaeme/monolog-ltsv-formatter
+```
