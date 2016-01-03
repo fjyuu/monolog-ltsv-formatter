@@ -1,2 +1,3 @@
 /vendor/
 /build/logs/
+/composer.lock
