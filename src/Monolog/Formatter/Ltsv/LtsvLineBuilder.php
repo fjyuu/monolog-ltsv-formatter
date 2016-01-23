@@ -1,5 +1,5 @@
 <?php
-namespace Hikaeme\Text\Ltsv;
+namespace Hikaeme\Monolog\Formatter\Ltsv;
 
 /**
  * Build a line of LTSV which can contain duplicate labels.

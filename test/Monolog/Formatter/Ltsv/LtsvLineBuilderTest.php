@@ -1,5 +1,5 @@
 <?php
-namespace Hikaeme\Text\Ltsv;
+namespace Hikaeme\Monolog\Formatter\Ltsv;
 
 class LtsvLineBuilderTest extends \PHPUnit_Framework_TestCase
 {

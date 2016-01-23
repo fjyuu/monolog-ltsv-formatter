@@ -1,7 +1,7 @@
 <?php
 namespace Hikaeme\Monolog\Formatter;
 
-use Hikaeme\Text\Ltsv\LtsvLineBuilder;
+use Hikaeme\Monolog\Formatter\Ltsv\LtsvLineBuilder;
 use Monolog\Formatter\NormalizerFormatter;
 
 /**
