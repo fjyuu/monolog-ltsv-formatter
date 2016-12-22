@@ -1,4 +1,5 @@
 <?php
+
 namespace Hikaeme\Monolog\Formatter;
 
 use Hikaeme\Monolog\Formatter\Ltsv\LtsvLineBuilder;
@@ -25,20 +26,20 @@ class LtsvFormatter extends NormalizerFormatter
     protected $valueReplacement;
 
     /**
-     * @param string $dateFormat The format of the timestamp: one supported by DateTime::format.
-     * @param array $labeling Associative array of a Monolog record to a LTSV record mapping.
-     * @param bool $includeContext Whether to include context fields in a LTSV record.
-     * @param bool $includeExtra Whether to include extra fields in a LTSV record.
-     * @param array $labelReplacement Rule of replacement for LTSV labels.
-     * @param array $valueReplacement Rule of replacement for LTSV values.
+     * @param string $dateFormat       The format of the timestamp: one supported by DateTime::format.
+     * @param array  $labeling         Associative array of a Monolog record to a LTSV record mapping.
+     * @param bool   $includeContext   Whether to include context fields in a LTSV record.
+     * @param bool   $includeExtra     Whether to include extra fields in a LTSV record.
+     * @param array  $labelReplacement Rule of replacement for LTSV labels.
+     * @param array  $valueReplacement Rule of replacement for LTSV values.
      */
     public function __construct(
         $dateFormat = null,
-        array $labeling = array('datetime' => 'time', 'level_name' => 'level', 'message' => 'message'),
+        array $labeling = ['datetime' => 'time', 'level_name' => 'level', 'message' => 'message'],
         $includeContext = true,
         $includeExtra = true,
-        array $labelReplacement = array("\r" => '', "\n" => '', "\t" => '', ':' => ''),
-        array $valueReplacement = array("\r" => '\r', "\n" => '\n', "\t" => '\t')
+        array $labelReplacement = ["\r" => '', "\n" => '', "\t" => '', ':' => ''],
+        array $valueReplacement = ["\r" => '\r', "\n" => '\n', "\t" => '\t']
     ) {
         parent::__construct($dateFormat);
         $this->labeling = $labeling;
@@ -55,7 +56,7 @@ class LtsvFormatter extends NormalizerFormatter
     {
         $builder = new LtsvLineBuilder($this->labelReplacement, $this->valueReplacement);
 
-        $ltsvRecord = array();
+        $ltsvRecord = [];
         foreach ($this->labeling as $monologKey => $ltsvLabel) {
             if (isset($record[$monologKey])) {
                 $ltsvRecord[$ltsvLabel] = $record[$monologKey];
@@ -76,20 +77,23 @@ class LtsvFormatter extends NormalizerFormatter
 
     /**
      * @param array $record
+     *
      * @return array
      */
     protected function normalizeRecord(array $record)
     {
         $normalized = $this->normalize($record);
-        $converted = array();
+        $converted = [];
         foreach ($normalized as $key => $value) {
             $converted[$key] = $this->convertToString($value);
         }
+
         return $converted;
     }
 
     /**
      * @param mixed $data
+     *
      * @return string
      */
     protected function convertToString($data)
