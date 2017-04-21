@@ -1,4 +1,5 @@
 <?php
+
 namespace Hikaeme\Monolog\Formatter\Ltsv;
 
 class LtsvLineBuilderTest extends \PHPUnit_Framework_TestCase
@@ -9,8 +10,8 @@ class LtsvLineBuilderTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->builder = new LtsvLineBuilder(
-            array("\r" => '', "\n" => '', "\t" => '', ':' => ''),
-            array("\r" => '\r', "\n" => '\n', "\t" => '\t')
+            ["\r" => '', "\n" => '', "\t" => '', ':' => ''],
+            ["\r" => '\r', "\n" => '\n', "\t" => '\t']
         );
     }
 
@@ -19,21 +20,21 @@ class LtsvLineBuilderTest extends \PHPUnit_Framework_TestCase
         $this->builder->addItem('a', 'b');
         $this->builder->addItem('c', 'd');
 
-        $expected = "a:b\tc:d" . PHP_EOL;
+        $expected = "a:b\tc:d".PHP_EOL;
         $this->assertSame($expected, $this->builder->build());
     }
 
     public function testAddRecord()
     {
-        $this->builder->addRecord(array(
+        $this->builder->addRecord([
             'a' => 'b',
             'c' => 'd',
-        ));
-        $this->builder->addRecord(array(
+        ]);
+        $this->builder->addRecord([
             'e' => 'f',
-        ));
+        ]);
 
-        $expected = "a:b\tc:d\te:f" . PHP_EOL;
+        $expected = "a:b\tc:d\te:f".PHP_EOL;
         $this->assertSame($expected, $this->builder->build());
     }
 
@@ -42,7 +43,7 @@ class LtsvLineBuilderTest extends \PHPUnit_Framework_TestCase
         $this->builder->addItem('a', 'b');
         $this->builder->addItem('a', 'b');
 
-        $expected = "a:b\ta:b" . PHP_EOL;
+        $expected = "a:b\ta:b".PHP_EOL;
         $this->assertSame($expected, $this->builder->build());
     }
 
@@ -50,7 +51,7 @@ class LtsvLineBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $this->builder->addItem("a:\tb\r\nc", "d:\te\r\nf");
 
-        $expected = 'abc:d:\te\r\nf' . PHP_EOL;
+        $expected = 'abc:d:\te\r\nf'.PHP_EOL;
         $this->assertSame($expected, $this->builder->build());
     }
 }

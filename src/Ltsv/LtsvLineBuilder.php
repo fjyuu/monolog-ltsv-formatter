@@ -1,4 +1,5 @@
 <?php
+
 namespace Hikaeme\Monolog\Formatter\Ltsv;
 
 /**
@@ -13,13 +14,13 @@ class LtsvLineBuilder
     private $valueReplacement;
 
     /** @var array[] Association list. */
-    private $items = array();
+    private $items = [];
 
     /**
      * @param array $labelReplacement
      * @param array $valueReplacement
      */
-    public function __construct(array $labelReplacement = array(), array $valueReplacement = array())
+    public function __construct(array $labelReplacement = [], array $valueReplacement = [])
     {
         $this->labelReplacement = $labelReplacement;
         $this->valueReplacement = $valueReplacement;
@@ -31,7 +32,7 @@ class LtsvLineBuilder
      */
     public function addItem($label, $value)
     {
-        $this->items[] = array($label, $value);
+        $this->items[] = [$label, $value];
     }
 
     /**
@@ -49,17 +50,18 @@ class LtsvLineBuilder
      */
     public function build()
     {
-        $itemStrings = array();
+        $itemStrings = [];
         foreach ($this->items as $item) {
             list($label, $value) = $item;
-            $itemStrings[] = $this->replaceLabel($label) . ':' . $this->replaceValue($value);
+            $itemStrings[] = $this->replaceLabel($label).':'.$this->replaceValue($value);
         }
 
-        return join("\t", $itemStrings) . PHP_EOL;
+        return implode("\t", $itemStrings).PHP_EOL;
     }
 
     /**
      * @param string $key
+     *
      * @return string
      */
     private function replaceLabel($key)
@@ -69,6 +71,7 @@ class LtsvLineBuilder
 
     /**
      * @param string $value
+     *
      * @return string
      */
     private function replaceValue($value)
