@@ -1,12 +1,14 @@
 <?php
 namespace Hikaeme\Monolog\Formatter\Ltsv;
 
-class LtsvLineBuilderTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class LtsvLineBuilderTest extends TestCase
 {
     /** @var LtsvLineBuilder */
     private $builder;
 
-    public function setUp()
+    public function setUp():void
     {
         $this->builder = new LtsvLineBuilder(
             array("\r" => '', "\n" => '', "\t" => '', ':' => ''),
