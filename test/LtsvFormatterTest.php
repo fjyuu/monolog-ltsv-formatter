@@ -2,8 +2,9 @@
 namespace Hikaeme\Monolog\Formatter;
 
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 
-class LtsvFormatterTest extends \PHPUnit_Framework_TestCase
+class LtsvFormatterTest extends TestCase
 {
     public function testFormat()
     {
