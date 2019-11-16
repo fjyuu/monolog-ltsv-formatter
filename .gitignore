@@ -1,3 +1,4 @@
 /vendor/
 /build/logs/
 /composer.lock
+/.phpunit.result.cache
