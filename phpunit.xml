@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-        >
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" bootstrap="vendor/autoload.php"
+         colors="true" processIsolation="false" stopOnFailure="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" cacheDirectory=".phpunit.cache"
+         backupStaticProperties="false">
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+            <text outputFile="php://stdout" showOnlySummary="true"/>
+        </report>
+    </coverage>
     <testsuites>
         <testsuite name="monolog-ltsv-formatter Unit Tests">
             <directory>test</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml" />
-        <log type="coverage-text" target="php://stdout" lowUpperBound="70" highLowerBound="90" showOnlySummary="true" />
-    </logging>
+    <logging/>
 </phpunit>

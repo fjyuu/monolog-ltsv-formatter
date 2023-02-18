@@ -1,7 +1,10 @@
 <?php
-namespace Hikaeme\Monolog\Formatter;
+declare(strict_types=1);
 
-use Hikaeme\Monolog\Formatter\Ltsv\LtsvLineBuilder;
+namespace Tyamahori\Monolog\Formatter;
+
+use Monolog\LogRecord;
+use Tyamahori\Monolog\Formatter\Ltsv\LtsvLineBuilder;
 use Monolog\Formatter\NormalizerFormatter;
 
 /**
@@ -9,20 +12,15 @@ use Monolog\Formatter\NormalizerFormatter;
  */
 class LtsvFormatter extends NormalizerFormatter
 {
-    /** @var array */
-    protected $labeling;
+    protected array $labeling;
 
-    /** @var bool */
-    protected $includeContext;
+    protected bool $includeContext;
 
-    /** @var bool */
-    protected $includeExtra;
+    protected bool $includeExtra;
 
-    /** @var array */
-    protected $labelReplacement;
+    protected array $labelReplacement;
 
-    /** @var array */
-    protected $valueReplacement;
+    protected array $valueReplacement;
 
     /**
      * @param string $dateFormat The format of the timestamp: one supported by DateTime::format.
@@ -34,11 +32,11 @@ class LtsvFormatter extends NormalizerFormatter
      */
     public function __construct(
         $dateFormat = null,
-        array $labeling = array('datetime' => 'time', 'level_name' => 'level', 'message' => 'message'),
-        $includeContext = true,
-        $includeExtra = true,
-        array $labelReplacement = array("\r" => '', "\n" => '', "\t" => '', ':' => ''),
-        array $valueReplacement = array("\r" => '\r', "\n" => '\n', "\t" => '\t')
+        array $labeling = ['datetime' => 'time', 'level_name' => 'level', 'message' => 'message'],
+        bool $includeContext = true,
+        bool $includeExtra = true,
+        array $labelReplacement = ["\r" => '', "\n" => '', "\t" => '', ':' => ''],
+        array $valueReplacement = ["\r" => '\r', "\n" => '\n', "\t" => '\t']
     ) {
         parent::__construct($dateFormat);
         $this->labeling = $labeling;
@@ -51,37 +49,38 @@ class LtsvFormatter extends NormalizerFormatter
     /**
      * {@inheritdoc}
      */
-    public function format(array $record)
+    public function format(LogRecord $record)
     {
-        $builder = new LtsvLineBuilder($this->labelReplacement, $this->valueReplacement);
+        $builder = new LtsvLineBuilder(
+            $this->labelReplacement,
+            $this->valueReplacement
+        );
 
-        $ltsvRecord = array();
+        $ltsvRecord = [];
+        $arrayRecords = $record->toArray();
+
         foreach ($this->labeling as $monologKey => $ltsvLabel) {
             if (isset($record[$monologKey])) {
-                $ltsvRecord[$ltsvLabel] = $record[$monologKey];
+                $ltsvRecord[$ltsvLabel] = $arrayRecords[$monologKey];
             }
         }
-        $builder->addRecord($this->normalizeRecord($ltsvRecord));
+        $builder->addRecord($this->normalizeArray($ltsvRecord));
 
         if ($this->includeContext && isset($record['context'])) {
-            $builder->addRecord($this->normalizeRecord($record['context']));
+            $builder->addRecord($this->normalizeArray($record['context']));
         }
 
         if ($this->includeExtra && isset($record['extra'])) {
-            $builder->addRecord($this->normalizeRecord($record['extra']));
+            $builder->addRecord($this->normalizeArray($record['extra']));
         }
 
         return $builder->build();
     }
 
-    /**
-     * @param array $record
-     * @return array
-     */
-    protected function normalizeRecord(array $record)
+    private function normalizeArray(array $record): array
     {
         $normalized = $this->normalize($record);
-        $converted = array();
+        $converted = [];
         foreach ($normalized as $key => $value) {
             $converted[$key] = $this->convertToString($value);
         }
@@ -92,9 +91,9 @@ class LtsvFormatter extends NormalizerFormatter
      * @param mixed $data
      * @return string
      */
-    protected function convertToString($data)
+    private function convertToString(mixed $data): string
     {
-        if (null === $data || is_bool($data)) {
+        if ($data === null || is_bool($data)) {
             return var_export($data, true);
         }
 
