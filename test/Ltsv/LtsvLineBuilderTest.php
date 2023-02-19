@@ -11,7 +11,7 @@ class LtsvLineBuilderTest extends TestCase
 {
     private LtsvLineBuilder $builder;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->builder = new LtsvLineBuilder(
             ["\r" => '', "\n" => '', "\t" => '', ':' => ''],
@@ -25,7 +25,7 @@ class LtsvLineBuilderTest extends TestCase
         $this->builder->addItem('c', 'd');
 
         $expected = "a:b\tc:d" . PHP_EOL;
-        $this->assertSame($expected, $this->builder->build());
+        static::assertSame($expected, $this->builder->build());
     }
 
     public function testAddRecord(): void
@@ -39,7 +39,7 @@ class LtsvLineBuilderTest extends TestCase
         ]);
 
         $expected = "a:b\tc:d\te:f" . PHP_EOL;
-        $this->assertSame($expected, $this->builder->build());
+        static::assertSame($expected, $this->builder->build());
     }
 
     public function testBuildWithDuplicateLabels(): void
@@ -48,7 +48,7 @@ class LtsvLineBuilderTest extends TestCase
         $this->builder->addItem('a', 'b');
 
         $expected = "a:b\ta:b" . PHP_EOL;
-        $this->assertSame($expected, $this->builder->build());
+        static::assertSame($expected, $this->builder->build());
     }
 
     public function testBuildWithReplacement(): void
@@ -56,6 +56,6 @@ class LtsvLineBuilderTest extends TestCase
         $this->builder->addItem("a:\tb\r\nc", "d:\te\r\nf");
 
         $expected = 'abc:d:\te\r\nf' . PHP_EOL;
-        $this->assertSame($expected, $this->builder->build());
+        static::assertSame($expected, $this->builder->build());
     }
 }

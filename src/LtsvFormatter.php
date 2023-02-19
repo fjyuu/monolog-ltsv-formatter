@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace Tyamahori\Monolog\Formatter;
 
+use Monolog\Formatter\NormalizerFormatter;
 use Monolog\LogRecord;
 use Tyamahori\Monolog\Formatter\Ltsv\LtsvLineBuilder;
-use Monolog\Formatter\NormalizerFormatter;
+
+use function is_bool;
+use function is_scalar;
 
 /**
  * Formats incoming records into a line of LTSV.
@@ -88,6 +91,7 @@ class LtsvFormatter extends NormalizerFormatter
         foreach ($normalized as $key => $value) {
             $converted[$key] = $this->convertToString($value);
         }
+
         return $converted;
     }
 

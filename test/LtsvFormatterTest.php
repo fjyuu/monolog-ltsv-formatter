@@ -19,20 +19,20 @@ class LtsvFormatterTest extends TestCase
             $dateTime,
             "t\ne\ts\rt\\",
             ["a:b\nc" => "d:e\rf"],
-            ["g:h\ti" => "j:k\nl", "m:n\\o" => "p:q\\r"]
+            ["g:h\ti" => "j:k\nl", 'm:n\\o' => 'p:q\\r']
         );
 
         $formatter = new LtsvFormatter('Y-m-d');
         $formatted = $formatter->format($record);
         $expected = implode("\t", [
-                'time:' . $dateTime->format('Y-m-d'),
-                'level:WARNING',
-                'message:t\ne\ts\rt\\',
-                'abc:d:e\rf',
-                'ghi:j:k\nl',
-                'mn\\o:p:q\\r',
-            ]) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+            'time:' . $dateTime->format('Y-m-d'),
+            'level:WARNING',
+            'message:t\ne\ts\rt\\',
+            'abc:d:e\rf',
+            'ghi:j:k\nl',
+            'mn\\o:p:q\\r',
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
     public function testFormatWithDuplicatedLabel(): void
@@ -40,7 +40,7 @@ class LtsvFormatterTest extends TestCase
         $dateTime = new DateTimeImmutable;
         $record = $this->getRecord(
             $dateTime,
-            "test",
+            'test',
             ['k1' => 'v1', 'message' => 'message'],
             ['k1' => 'v2']
         );
@@ -48,14 +48,14 @@ class LtsvFormatterTest extends TestCase
         $formatter = new LtsvFormatter('Y-m-d');
         $formatted = $formatter->format($record);
         $expected = implode("\t", [
-                'time:' . $dateTime->format('Y-m-d'),
-                'level:WARNING',
-                'message:test',
-                'k1:v1',
-                'message:message',
-                'k1:v2',
-            ]) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+            'time:' . $dateTime->format('Y-m-d'),
+            'level:WARNING',
+            'message:test',
+            'k1:v1',
+            'message:message',
+            'k1:v2',
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
     public function testFormatWithSettings(): void
@@ -78,10 +78,10 @@ class LtsvFormatterTest extends TestCase
         );
         $formatted = $formatter->format($record);
         $expected = implode("\t", [
-                'date:' . $dateTime->format('H:i:s Y-m-d'),
-                "mess\nage:test\ntest",
-            ]) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+            'date:' . $dateTime->format('H:i:s Y-m-d'),
+            "mess\nage:test\ntest",
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
     public function testFormatContextContainingObjects(): void
@@ -89,7 +89,7 @@ class LtsvFormatterTest extends TestCase
         $dateTime = new DateTimeImmutable;
         $record = $this->getRecord(
             $dateTime,
-            "test",
+            'test',
             [
                 'null' => null,
                 'bool' => true,
@@ -100,14 +100,14 @@ class LtsvFormatterTest extends TestCase
         $formatter = new LtsvFormatter('Y-m-d');
         $formatted = $formatter->format($record);
         $expected = implode("\t", [
-                'time:' . $dateTime->format('Y-m-d'),
-                'level:WARNING',
-                'message:test',
-                'null:NULL',
-                'bool:true',
-                'array:[1,2,3]',
-            ]) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+            'time:' . $dateTime->format('Y-m-d'),
+            'level:WARNING',
+            'message:test',
+            'null:NULL',
+            'bool:true',
+            'array:[1,2,3]',
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
     /**
@@ -119,11 +119,10 @@ class LtsvFormatterTest extends TestCase
      */
     private function getRecord(
         DateTimeImmutable $dateTime,
-        string            $message = 'test',
-        array             $context = [],
-        array             $extra = []
-    ): LogRecord
-    {
+        string $message = 'test',
+        array $context = [],
+        array $extra = []
+    ): LogRecord {
         return new LogRecord(
             $dateTime,
             'test',
