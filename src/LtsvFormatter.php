@@ -67,11 +67,15 @@ class LtsvFormatter extends NormalizerFormatter
         $builder->addRecord($this->normalizeArray($ltsvRecord));
 
         if ($this->includeContext && isset($record['context'])) {
-            $builder->addRecord($this->normalizeArray($record['context']));
+            /** @var array $context */
+            $context = $record['context'];
+            $builder->addRecord($this->normalizeArray($context));
         }
 
         if ($this->includeExtra && isset($record['extra'])) {
-            $builder->addRecord($this->normalizeArray($record['extra']));
+            /** @var array $extra */
+            $extra = $record['extra'];
+            $builder->addRecord($this->normalizeArray($extra));
         }
 
         return $builder->build();

@@ -33,5 +33,10 @@ jobs:
       - name: Install dependencies
         run: |
           composer install
+
+      - name: Lint check
+        run: |
+          ./vendor/bin/phpstan.phar analyse
+
       - name: Execute tests
         run: ./vendor/bin/phpunit

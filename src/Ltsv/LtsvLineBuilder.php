@@ -8,7 +8,6 @@ namespace Tyamahori\Monolog\Formatter\Ltsv;
  */
 class LtsvLineBuilder
 {
-    /** @var array[] Association list. */
     private array $items = [];
 
     /**
