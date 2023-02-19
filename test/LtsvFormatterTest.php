@@ -1,126 +1,136 @@
 <?php
-namespace Hikaeme\Monolog\Formatter;
 
-use Monolog\Logger;
+declare(strict_types=1);
+
+namespace Test;
+
+use DateTimeImmutable;
+use Monolog\Level;
+use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
+use Tyamahori\Monolog\Formatter\LtsvFormatter;
 
 class LtsvFormatterTest extends TestCase
 {
-    public function testFormat()
+    public function testFormat(): void
     {
-        $dateTime = new \DateTime;
+        $dateTime = new DateTimeImmutable();
         $record = $this->getRecord(
             $dateTime,
             "t\ne\ts\rt\\",
-            array("a:b\nc" => "d:e\rf"),
-            array("g:h\ti" => "j:k\nl", "m:n\\o" => "p:q\\r")
+            ["a:b\nc" => "d:e\rf"],
+            ["g:h\ti" => "j:k\nl", 'm:n\\o' => 'p:q\\r']
         );
 
         $formatter = new LtsvFormatter('Y-m-d');
         $formatted = $formatter->format($record);
-        $expected = join("\t", array(
-                'time:' . $dateTime->format('Y-m-d'),
-                'level:WARNING',
-                'message:t\ne\ts\rt\\',
-                'abc:d:e\rf',
-                'ghi:j:k\nl',
-                'mn\\o:p:q\\r',
-            )) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+        $expected = implode("\t", [
+            'time:' . $dateTime->format('Y-m-d'),
+            'level:WARNING',
+            'message:t\ne\ts\rt\\',
+            'abc:d:e\rf',
+            'ghi:j:k\nl',
+            'mn\\o:p:q\\r',
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
-    public function testFormatWithDuplicatedLabel()
+    public function testFormatWithDuplicatedLabel(): void
     {
-        $dateTime = new \DateTime;
+        $dateTime = new DateTimeImmutable;
         $record = $this->getRecord(
             $dateTime,
-            "test",
-            array('k1' => 'v1', 'message' => 'message'),
-            array('k1' => 'v2')
+            'test',
+            ['k1' => 'v1', 'message' => 'message'],
+            ['k1' => 'v2']
         );
 
         $formatter = new LtsvFormatter('Y-m-d');
         $formatted = $formatter->format($record);
-        $expected = join("\t", array(
-                'time:' . $dateTime->format('Y-m-d'),
-                'level:WARNING',
-                'message:test',
-                'k1:v1',
-                'message:message',
-                'k1:v2',
-            )) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+        $expected = implode("\t", [
+            'time:' . $dateTime->format('Y-m-d'),
+            'level:WARNING',
+            'message:test',
+            'k1:v1',
+            'message:message',
+            'k1:v2',
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
-    public function testFormatWithSettings()
+    public function testFormatWithSettings(): void
     {
-        $dateTime = new \DateTime;
+        $dateTime = new DateTimeImmutable;
         $record = $this->getRecord(
             $dateTime,
             "test\ntest",
-            array('k1' => 'v1'),
-            array('k2' => 'v2')
+            ['k1' => 'v1'],
+            ['k2' => 'v2']
         );
 
         $formatter = new LtsvFormatter(
             'H:i:s Y-m-d',
-            array('datetime' => 'date', 'message' => "mess\nage"),
+            ['datetime' => 'date', 'message' => "mess\nage"],
             false,
             false,
-            array(),
-            array()
+            [],
+            []
         );
         $formatted = $formatter->format($record);
-        $expected = join("\t", array(
-                'date:' . $dateTime->format('H:i:s Y-m-d'),
-                "mess\nage:test\ntest",
-            )) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+        $expected = implode("\t", [
+            'date:' . $dateTime->format('H:i:s Y-m-d'),
+            "mess\nage:test\ntest",
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
-    public function testFormatContextContainingObjects()
+    public function testFormatContextContainingObjects(): void
     {
-        $dateTime = new \DateTime;
+        $dateTime = new DateTimeImmutable;
         $record = $this->getRecord(
             $dateTime,
-            "test",
-            array(
+            'test',
+            [
                 'null' => null,
                 'bool' => true,
-                'array' => array(1, 2, 3),
-            )
+                'array' => [1, 2, 3],
+            ]
         );
 
         $formatter = new LtsvFormatter('Y-m-d');
         $formatted = $formatter->format($record);
-        $expected = join("\t", array(
-                'time:' . $dateTime->format('Y-m-d'),
-                'level:WARNING',
-                'message:test',
-                'null:NULL',
-                'bool:true',
-                'array:[1,2,3]',
-            )) . PHP_EOL;
-        $this->assertSame($expected, $formatted);
+        $expected = implode("\t", [
+            'time:' . $dateTime->format('Y-m-d'),
+            'level:WARNING',
+            'message:test',
+            'null:NULL',
+            'bool:true',
+            'array:[1,2,3]',
+        ]) . PHP_EOL;
+        static::assertSame($expected, $formatted);
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param DateTimeImmutable $dateTime
      * @param string $message
      * @param array $context
      * @param array $extra
-     * @return array Record
+     * @return LogRecord Record
      */
-    private function getRecord(\DateTime $dateTime, $message = 'test', $context = array(), $extra = array())
-    {
-        return array(
-            'message' => $message,
-            'context' => $context,
-            'level' => Logger::WARNING,
-            'level_name' => Logger::getLevelName(Logger::WARNING),
-            'channel' => 'test',
-            'datetime' => $dateTime,
-            'extra' => $extra,
+    private function getRecord(
+        DateTimeImmutable $dateTime,
+        string $message = 'test',
+        array $context = [],
+        array $extra = []
+    ): LogRecord {
+        return new LogRecord(
+            $dateTime,
+            'test',
+            Level::Warning,
+            $message,
+            $context,
+            $extra,
+            null,
         );
     }
 }

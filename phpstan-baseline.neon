@@ -1,0 +1,86 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:__construct\\(\\) has parameter \\$labelReplacement with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:__construct\\(\\) has parameter \\$valueReplacement with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:addRecord\\(\\) has parameter \\$record with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
+
+		-
+			message: "#^Property Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:\\$items type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
+
+		-
+			message: "#^Argument of an invalid type array\\<array\\|bool\\|float\\|int\\|string\\|null\\>\\|bool\\|float\\|int\\|string\\|null supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:__construct\\(\\) has parameter \\$labelReplacement with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:__construct\\(\\) has parameter \\$labeling with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:__construct\\(\\) has parameter \\$valueReplacement with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:normalizeArray\\(\\) has parameter \\$record with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:normalizeArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$context has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$extra has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Property Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:\\$labelReplacement type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Property Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:\\$labeling type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Property Tyamahori\\\\Monolog\\\\Formatter\\\\LtsvFormatter\\:\\:\\$valueReplacement type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/LtsvFormatter.php
+
+		-
+			message: "#^Method Test\\\\LtsvFormatterTest\\:\\:getRecord\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: test/LtsvFormatterTest.php
+
+		-
+			message: "#^Method Test\\\\LtsvFormatterTest\\:\\:getRecord\\(\\) has parameter \\$extra with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: test/LtsvFormatterTest.php

@@ -1,68 +1,63 @@
 <?php
-namespace Hikaeme\Monolog\Formatter\Ltsv;
+declare(strict_types=1);
+
+namespace Tyamahori\Monolog\Formatter\Ltsv;
 
 /**
  * Build a line of LTSV which can contain duplicate labels.
  */
 class LtsvLineBuilder
 {
-    /** @var array */
-    private $labelReplacement;
-
-    /** @var array */
-    private $valueReplacement;
-
-    /** @var array[] Association list. */
-    private $items = array();
+    private array $items = [];
 
     /**
      * @param array $labelReplacement
      * @param array $valueReplacement
      */
-    public function __construct(array $labelReplacement = array(), array $valueReplacement = array())
-    {
-        $this->labelReplacement = $labelReplacement;
-        $this->valueReplacement = $valueReplacement;
+    public function __construct(
+        private array $labelReplacement = [],
+        private array $valueReplacement = []
+    ) {
     }
 
     /**
      * @param string $label
      * @param string $value
      */
-    public function addItem($label, $value)
+    public function addItem(string $label, string $value): void
     {
-        $this->items[] = array($label, $value);
+        $this->items[] = [$label, $value];
     }
 
     /**
      * @param array $record
      */
-    public function addRecord(array $record)
+    public function addRecord(array $record): void
     {
         foreach ($record as $label => $value) {
-            $this->addItem((string) $label, (string) $value);
+            $this->addItem((string)$label, (string)$value);
         }
     }
 
     /**
      * @return string
      */
-    public function build()
+    public function build(): string
     {
-        $itemStrings = array();
+        $itemStrings = [];
         foreach ($this->items as $item) {
-            list($label, $value) = $item;
+            [$label, $value] = $item;
             $itemStrings[] = $this->replaceLabel($label) . ':' . $this->replaceValue($value);
         }
 
-        return join("\t", $itemStrings) . PHP_EOL;
+        return implode("\t", $itemStrings) . PHP_EOL;
     }
 
     /**
      * @param string $key
      * @return string
      */
-    private function replaceLabel($key)
+    private function replaceLabel(string $key): string
     {
         return strtr($key, $this->labelReplacement);
     }
@@ -71,7 +66,7 @@ class LtsvLineBuilder
      * @param string $value
      * @return string
      */
-    private function replaceValue($value)
+    private function replaceValue(string $value): string
     {
         return strtr($value, $this->valueReplacement);
     }
