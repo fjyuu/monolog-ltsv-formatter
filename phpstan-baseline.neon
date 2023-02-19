@@ -1,6 +1,24 @@
 parameters:
 	ignoreErrors:
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:__construct\\(\\) has parameter \\$labelReplacement with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
 
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:__construct\\(\\) has parameter \\$valueReplacement with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
+
+		-
+			message: "#^Method Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:addRecord\\(\\) has parameter \\$record with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
+
+		-
+			message: "#^Property Tyamahori\\\\Monolog\\\\Formatter\\\\Ltsv\\\\LtsvLineBuilder\\:\\:\\$items type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Ltsv/LtsvLineBuilder.php
 
 		-
 			message: "#^Argument of an invalid type array\\<array\\|bool\\|float\\|int\\|string\\|null\\>\\|bool\\|float\\|int\\|string\\|null supplied for foreach, only iterables are supported\\.$#"
