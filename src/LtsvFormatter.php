@@ -3,6 +3,7 @@ namespace Hikaeme\Monolog\Formatter;
 
 use Hikaeme\Monolog\Formatter\Ltsv\LtsvLineBuilder;
 use Monolog\Formatter\NormalizerFormatter;
+use Monolog\LogRecord;
 
 /**
  * Formats incoming records into a line of LTSV.
@@ -51,7 +52,7 @@ class LtsvFormatter extends NormalizerFormatter
     /**
      * {@inheritdoc}
      */
-    public function format(array $record)
+    public function format(LogRecord $record)
     {
         $builder = new LtsvLineBuilder($this->labelReplacement, $this->valueReplacement);
 
@@ -61,14 +62,14 @@ class LtsvFormatter extends NormalizerFormatter
                 $ltsvRecord[$ltsvLabel] = $record[$monologKey];
             }
         }
-        $builder->addRecord($this->normalizeRecord($ltsvRecord));
+        $builder->addRecord($this->normalizeArrayRecord($ltsvRecord));
 
         if ($this->includeContext && isset($record['context'])) {
-            $builder->addRecord($this->normalizeRecord($record['context']));
+            $builder->addRecord($this->normalizeArrayRecord($record['context']));
         }
 
         if ($this->includeExtra && isset($record['extra'])) {
-            $builder->addRecord($this->normalizeRecord($record['extra']));
+            $builder->addRecord($this->normalizeArrayRecord($record['extra']));
         }
 
         return $builder->build();
@@ -78,7 +79,7 @@ class LtsvFormatter extends NormalizerFormatter
      * @param array $record
      * @return array
      */
-    protected function normalizeRecord(array $record)
+    protected function normalizeArrayRecord(array $record)
     {
         $normalized = $this->normalize($record);
         $converted = array();

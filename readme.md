@@ -12,12 +12,13 @@ A [LTSV](http://ltsv.org/) Formatter for [Monolog](https://github.com/Seldaek/mo
 ## Usage ##
 
 ```php
+use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Hikaeme\Monolog\Formatter\LtsvFormatter;
 
 $log = new Logger('DEMO');
-$handler = new StreamHandler('php://stdout', Logger::WARNING);
+$handler = new StreamHandler('php://stdout', Level::Error);
 $handler->setFormatter(new LtsvFormatter('Y-m-d H:i:s'));
 $log->pushHandler($handler);
 
