@@ -7,17 +7,18 @@
 [![Latest Unstable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/unstable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
 [![License](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/license)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
 
-A [LTSV](http://ltsv.org/) Formatter for [Monolog](https://github.com/Seldaek/monolog)
+An [LTSV](http://ltsv.org/) Formatter for [Monolog](https://github.com/Seldaek/monolog)
 
 ## Usage ##
 
 ```php
+use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Hikaeme\Monolog\Formatter\LtsvFormatter;
 
 $log = new Logger('DEMO');
-$handler = new StreamHandler('php://stdout', Logger::WARNING);
+$handler = new StreamHandler('php://stdout', Level::Error);
 $handler->setFormatter(new LtsvFormatter('Y-m-d H:i:s'));
 $log->pushHandler($handler);
 

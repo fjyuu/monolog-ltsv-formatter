@@ -1,14 +1,15 @@
 <?php
 namespace Hikaeme\Monolog\Formatter;
 
-use Monolog\Logger;
+use Monolog\Level;
+use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
 
 class LtsvFormatterTest extends TestCase
 {
     public function testFormat()
     {
-        $dateTime = new \DateTime;
+        $dateTime = new \DateTimeImmutable();
         $record = $this->getRecord(
             $dateTime,
             "t\ne\ts\rt\\",
@@ -31,7 +32,7 @@ class LtsvFormatterTest extends TestCase
 
     public function testFormatWithDuplicatedLabel()
     {
-        $dateTime = new \DateTime;
+        $dateTime = new \DateTimeImmutable();
         $record = $this->getRecord(
             $dateTime,
             "test",
@@ -54,7 +55,7 @@ class LtsvFormatterTest extends TestCase
 
     public function testFormatWithSettings()
     {
-        $dateTime = new \DateTime;
+        $dateTime = new \DateTimeImmutable();
         $record = $this->getRecord(
             $dateTime,
             "test\ntest",
@@ -80,7 +81,7 @@ class LtsvFormatterTest extends TestCase
 
     public function testFormatContextContainingObjects()
     {
-        $dateTime = new \DateTime;
+        $dateTime = new \DateTimeImmutable();
         $record = $this->getRecord(
             $dateTime,
             "test",
@@ -105,22 +106,22 @@ class LtsvFormatterTest extends TestCase
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeImmutable $dateTime
      * @param string $message
      * @param array $context
      * @param array $extra
-     * @return array Record
+     * @return LogRecord Record
      */
-    private function getRecord(\DateTime $dateTime, $message = 'test', $context = array(), $extra = array())
+    private function getRecord(\DateTimeImmutable $dateTime, $message = 'test', $context = array(), $extra = array())
     {
-        return array(
-            'message' => $message,
-            'context' => $context,
-            'level' => Logger::WARNING,
-            'level_name' => Logger::getLevelName(Logger::WARNING),
-            'channel' => 'test',
-            'datetime' => $dateTime,
-            'extra' => $extra,
+        return new LogRecord(
+            $dateTime,
+            'test',
+            Level::Warning,
+            $message,
+            $context,
+            $extra,
+            null,
         );
     }
 }
