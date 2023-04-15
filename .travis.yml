@@ -1,8 +1,0 @@
-language: php
-php:
-  - '8.2'
-before_script: composer install
-after_script: vendor/bin/test-reporter
-addons:
-  code_climate:
-    repo_token: 7764d148bb4f016172f4e271ab65388758928075ba3576b4ec906ccf0ec31ab7
