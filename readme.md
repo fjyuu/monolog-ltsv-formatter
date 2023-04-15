@@ -7,7 +7,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/v/unstable)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
 [![License](https://poser.pugx.org/hikaeme/monolog-ltsv-formatter/license)](https://packagist.org/packages/hikaeme/monolog-ltsv-formatter)
 
-A [LTSV](http://ltsv.org/) Formatter for [Monolog](https://github.com/Seldaek/monolog)
+An [LTSV](http://ltsv.org/) Formatter for [Monolog](https://github.com/Seldaek/monolog)
 
 ## Usage ##
 

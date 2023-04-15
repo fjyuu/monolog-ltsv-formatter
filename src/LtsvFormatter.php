@@ -1,4 +1,5 @@
 <?php
+
 namespace Hikaeme\Monolog\Formatter;
 
 use Hikaeme\Monolog\Formatter\Ltsv\LtsvLineBuilder;
@@ -35,11 +36,11 @@ class LtsvFormatter extends NormalizerFormatter
      */
     public function __construct(
         $dateFormat = null,
-        array $labeling = array('datetime' => 'time', 'level_name' => 'level', 'message' => 'message'),
+        array $labeling = ['datetime' => 'time', 'level_name' => 'level', 'message' => 'message'],
         $includeContext = true,
         $includeExtra = true,
-        array $labelReplacement = array("\r" => '', "\n" => '', "\t" => '', ':' => ''),
-        array $valueReplacement = array("\r" => '\r', "\n" => '\n', "\t" => '\t')
+        array $labelReplacement = ["\r" => '', "\n" => '', "\t" => '', ':' => ''],
+        array $valueReplacement = ["\r" => '\r', "\n" => '\n', "\t" => '\t']
     ) {
         parent::__construct($dateFormat);
         $this->labeling = $labeling;
@@ -56,7 +57,7 @@ class LtsvFormatter extends NormalizerFormatter
     {
         $builder = new LtsvLineBuilder($this->labelReplacement, $this->valueReplacement);
 
-        $ltsvRecord = array();
+        $ltsvRecord = [];
         foreach ($this->labeling as $monologKey => $ltsvLabel) {
             if (isset($record[$monologKey])) {
                 $ltsvRecord[$ltsvLabel] = $record[$monologKey];
@@ -79,10 +80,10 @@ class LtsvFormatter extends NormalizerFormatter
      * @param array $record
      * @return array
      */
-    protected function normalizeArrayRecord(array $record)
+    private function normalizeArrayRecord(array $record)
     {
         $normalized = $this->normalize($record);
-        $converted = array();
+        $converted = [];
         foreach ($normalized as $key => $value) {
             $converted[$key] = $this->convertToString($value);
         }
@@ -93,7 +94,7 @@ class LtsvFormatter extends NormalizerFormatter
      * @param mixed $data
      * @return string
      */
-    protected function convertToString($data)
+    private function convertToString($data)
     {
         if (null === $data || is_bool($data)) {
             return var_export($data, true);
